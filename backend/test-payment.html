@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Razorpay Payment</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  
+
+  <h2>Kisan Direct - Test Payment</h2>
+
+  <label>Buyer JWT Token:</label><br />
+  <textarea id="buyerToken" rows="3" cols="80" placeholder="Apna Buyer token yaha paste karo"></textarea><br /><br />
+
+  <label>Order ID:</label><br />
+  <input type="number" id="orderId" placeholder="Order ID daalo (jaise 1)" /><br /><br />
+
+  <button onclick="startPayment()">Pay Now</button>
+
+  <p id="statusMsg"></p>
+
+  <script>
+    async function startPayment() {
+      const token = document.getElementById("buyerToken").value.trim();
+      const orderId = document.getElementById("orderId").value.trim();
+      const statusMsg = document.getElementById("statusMsg");
+
+      if (!token || !orderId) {
+        alert("Token aur Order ID dono zaroori hain!");
+        return;
+      }
+
+      statusMsg.innerText = "Payment order create ho raha hai...";
+
+      const createRes = await fetch(`http://localhost:5000/api/orders/${orderId}/pay`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const createData = await createRes.json();
+
+      if (!createRes.ok) {
+        statusMsg.innerText = "Error: " + (createData.error || "Kuch galat hua");
+        return;
+      }
+
+      statusMsg.innerText = "Razorpay checkout khul raha hai...";
+
+      const options = {
+        key: createData.key_id,
+        amount: createData.razorpayOrder.amount,
+        currency: createData.razorpayOrder.currency,
+        name: "Kisan Direct",
+        description: "Order Payment",
+        order_id: createData.razorpayOrder.id,
+        handler: async function (response) {
+          statusMsg.innerText = "Payment verify ho raha hai...";
+
+          const verifyRes = await fetch(`http://localhost:5000/api/orders/${orderId}/verify`, {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          const verifyData = await verifyRes.json();
+
+          if (verifyRes.ok) {
+            statusMsg.innerText = "✅ " + verifyData.message;
+          } else {
+            statusMsg.innerText = "❌ " + (verifyData.error || "Verify fail hua");
+          }
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+  </script>
+
+</body>
+</html>
