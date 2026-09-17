@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider     = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -24,24 +25,24 @@ model User {
   isVerified  Boolean  @default(false)
   createdAt   DateTime @default(now())
 
-  listings       Listing[]
-  ordersAsBuyer  Order[]   @relation("BuyerOrders")
-  ordersAsFarmer Order[]   @relation("FarmerOrders")
-  reviewsGiven   Review[]  @relation("ReviewsGiven")
+  listings        Listing[]
+  ordersAsBuyer   Order[]  @relation("BuyerOrders")
+  ordersAsFarmer  Order[]  @relation("FarmerOrders")
+  reviewsGiven    Review[] @relation("ReviewsGiven")
   reviewsReceived Review[] @relation("ReviewsReceived")
 }
 
 model Listing {
-  id               Int      @id @default(autoincrement())
-  farmerId         Int
-  farmer           User     @relation(fields: [farmerId], references: [id])
-  cropName         String
-  quantity         Float
-  pricePerQuintal  Float
-  location         String
-  photoUrl         String?
-  status           String   @default("active")
-  createdAt        DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  farmerId        Int
+  farmer          User     @relation(fields: [farmerId], references: [id])
+  cropName        String
+  quantity        Float
+  pricePerQuintal Float
+  location        String
+  photoUrl        String?
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
 
   orders Order[]
 }
@@ -51,7 +52,7 @@ model Order {
   listingId       Int
   listing         Listing  @relation(fields: [listingId], references: [id])
   buyerId         Int
-  buyer           User     @relation("BuyerOrders", fields: [buyerId], references: [id])
+  buyer            User     @relation("BuyerOrders", fields: [buyerId], references: [id])
   farmerId        Int
   farmer          User     @relation("FarmerOrders", fields: [farmerId], references: [id])
   quantityOrdered Float
