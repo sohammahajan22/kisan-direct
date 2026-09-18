@@ -1,234 +1,513 @@
 /* =========================================
-   ORDER MODAL - PREMIUM FIX
+   KISAN DIRECT - ORDER MODAL
+   FINAL UI FIX
    ========================================= */
 
 .order-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 24px;
+
   background: rgba(0, 20, 10, 0.72);
   backdrop-filter: blur(10px);
 }
 
+/* MAIN MODAL */
+
 .order-modal {
   position: relative;
+
   width: min(620px, 100%);
   max-height: 90vh;
+
   overflow-y: auto;
+
   padding: 32px;
+
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
-  background: linear-gradient(145deg, #073b29, #052d20);
-  color: white;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+
+  background: linear-gradient(
+    145deg,
+    #073b29,
+    #052d20
+  );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45);
+
+  box-sizing: border-box;
 }
 
-.modal-close {
+
+/* CLOSE BUTTON */
+
+.order-modal .modal-close {
   position: absolute;
+
   top: 18px;
   right: 18px;
+
   width: 42px;
   height: 42px;
+
   padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 50%;
+
   background: rgba(255, 255, 255, 0.08);
-  color: white;
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
   font-size: 25px;
+  line-height: 1;
+
   box-shadow: none;
 }
 
-.modal-close:hover {
+.order-modal .modal-close:hover {
   background: rgba(255, 255, 255, 0.16);
   transform: none;
 }
 
-.modal-top {
+
+/* =========================================
+   MODAL HEADER
+   ========================================= */
+
+.order-modal .modal-top {
   display: flex;
+
   align-items: center;
+
   gap: 18px;
-  margin-bottom: 28px;
-  padding-right: 45px;
+
+  margin-bottom: 32px;
+
+  padding-right: 55px;
 }
 
-.modal-crop-icon {
+.order-modal .modal-crop-icon {
   width: 62px;
   height: 62px;
+
   flex-shrink: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 18px;
+
   background: rgba(46, 125, 50, 0.35);
+
   font-size: 30px;
 }
 
-.modal-top > div:last-child > span {
+.order-modal .modal-top > div:last-child {
+  min-width: 0;
+}
+
+.order-modal .modal-top > div:last-child > span {
+  display: block;
+
+  margin: 0 0 6px 0;
+
   color: #9ee6b8;
+
   font-size: 12px;
   font-weight: 700;
+
   letter-spacing: 1.5px;
 }
 
-.modal-top h2 {
-  margin: 5px 0 0;
+.order-modal .modal-top h2 {
+  margin: 0;
+
+  color: #ffffff;
+
   font-size: 30px;
-  color: white;
+  line-height: 1.2;
 }
 
-/* DETAILS - IMPORTANT FIX */
 
-.modal-details {
+/* =========================================
+   DETAILS CARDS
+   ========================================= */
+
+.order-modal .modal-details {
+  width: 100%;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 25px;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 14px;
+
+  margin: 0 0 28px 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
 }
 
-.modal-details > div {
-  padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+
+/* EACH DETAIL BOX */
+
+.order-modal .modal-details > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+
+  padding: 17px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
   border-radius: 14px;
+
   background: rgba(255, 255, 255, 0.055);
 }
 
-.modal-details small {
+
+/* DETAIL TITLE */
+
+.order-modal .modal-details small {
   display: block;
-  margin-bottom: 7px;
+
+  margin: 0;
+  padding: 0;
+
   color: #8fb8a2;
-  font-size: 11px;
+
+  font-size: 10px;
   font-weight: 700;
+
+  line-height: 1.3;
+
   letter-spacing: 1px;
+
+  white-space: nowrap;
 }
 
-.modal-details strong {
+
+/* DETAIL VALUE */
+
+.order-modal .modal-details strong {
   display: block;
-  color: white;
+
+  margin: 0;
+  padding: 0;
+
+  color: #ffffff;
+
   font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.5;
+
+  white-space: normal;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   QUANTITY LABEL
+   ========================================= */
+
+.order-modal .quantity-label {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  margin: 0 0 10px 0;
+  padding: 0;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  letter-spacing: 1px;
+
+  box-sizing: border-box;
+}
+
+.order-modal .quantity-label span {
+  display: block;
+
+  flex-shrink: 0;
+
+  color: #8fb8a2;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+
+  letter-spacing: 0;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   QUANTITY INPUT
+   ========================================= */
+
+.order-modal .quantity-input {
+  width: 100%;
+
+  display: block;
+
+  box-sizing: border-box;
+
+  padding: 15px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #ffffff;
+
+  font-size: 16px;
+
   line-height: 1.4;
 }
 
-.quantity-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 9px;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.quantity-label span {
-  color: #8fb8a2;
-  font-size: 11px;
-  letter-spacing: 0;
-}
-
-.quantity-input {
-  width: 100%;
-  padding: 15px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.07);
-  color: white;
-  font-size: 16px;
-}
-
-.quantity-input::placeholder {
+.order-modal .quantity-input::placeholder {
   color: #7fa394;
 }
 
-.quantity-input:focus {
+.order-modal .quantity-input:focus {
   border-color: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.15);
 }
 
-.total-preview {
+
+/* =========================================
+   TOTAL PREVIEW
+   ========================================= */
+
+.order-modal .total-preview {
+  width: 100%;
+
   display: flex;
+
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+
+  gap: 20px;
+
+  margin: 16px 0 0 0;
   padding: 16px 18px;
+
+  box-sizing: border-box;
+
   border-radius: 14px;
+
   background: rgba(34, 197, 94, 0.10);
+
   border: 1px solid rgba(34, 197, 94, 0.18);
 }
 
-.total-preview span {
+.order-modal .total-preview span {
   color: #a9c8b7;
+
   font-size: 13px;
+
+  line-height: 1.4;
 }
 
-.total-preview strong {
+.order-modal .total-preview strong {
   color: #4ade80;
+
   font-size: 22px;
+
+  line-height: 1.3;
 }
 
-.order-message {
-  margin-top: 14px;
+
+/* =========================================
+   ORDER MESSAGE
+   ========================================= */
+
+.order-modal .order-message {
+  margin: 14px 0 0 0;
+
   padding: 12px 14px;
+
   border-radius: 10px;
+
   background: rgba(255, 255, 255, 0.07);
+
   color: #d7f8e3;
+
   font-size: 14px;
+
+  line-height: 1.5;
 }
 
-.modal-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 24px;
-}
 
-.modal-actions button {
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.order-modal .modal-actions {
   width: 100%;
-  min-height: 48px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin: 24px 0 0 0;
+  padding: 0;
+
+  box-sizing: border-box;
 }
 
-.cancel-order {
+.order-modal .modal-actions button {
+  width: 100%;
+
+  min-height: 48px;
+
+  box-sizing: border-box;
+}
+
+
+/* CANCEL */
+
+.order-modal .cancel-order {
   background: rgba(255, 255, 255, 0.07);
+
   color: #d1ddd6;
+
   border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
-.cancel-order:hover {
+.order-modal .cancel-order:hover {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.confirm-order {
+
+/* CONFIRM */
+
+.order-modal .confirm-order {
   background: #22c55e;
+
   color: #042b17;
 }
 
-.confirm-order:hover {
+.order-modal .confirm-order:hover {
   background: #16a34a;
 }
 
-/* MOBILE */
 
-@media (max-width: 600px) {
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
   .order-overlay {
-    padding: 12px;
+    padding: 14px;
   }
 
   .order-modal {
-    padding: 22px;
+    width: 100%;
+
+    padding: 24px;
+
     border-radius: 20px;
   }
 
-  .modal-details {
-    grid-template-columns: 1fr;
+  .order-modal .modal-top {
+    margin-bottom: 26px;
   }
 
-  .modal-actions {
-    grid-template-columns: 1fr;
+  .order-modal .modal-top h2 {
+    font-size: 26px;
   }
 
-  .modal-top h2 {
-    font-size: 25px;
+  .order-modal .modal-details {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .order-modal .modal-details > div {
+    padding: 15px;
+  }
+
+  .order-modal .modal-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 420px) {
+
+  .order-modal {
+    padding: 20px;
+  }
+
+  .order-modal .modal-crop-icon {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 15px;
+
+    font-size: 26px;
+  }
+
+  .order-modal .modal-top h2 {
+    font-size: 23px;
+  }
+
+  .order-modal .quantity-label {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
   }
 }
