@@ -1,16 +1,71 @@
-# React + Vite
+# 🌾 Kisan Direct
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+### Farmer to Buyer Marketplace
 
-Currently, two official plugins are available:
+Kisan Direct is a full-stack marketplace that connects farmers directly with buyers. Farmers can list their crops, manage orders, upload crop images, and receive payments directly from buyers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+Frontend: https://kisan-direct-2.onrender.com
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Backend API: https://kisan-direct-1.onrender.com
 
-## Expanding the Oxlint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- 🔐 User Signup & Login
+- 👨‍🌾 Farmer Dashboard
+- 🛒 Buyer Marketplace
+- 🌾 Crop Listings
+- 📷 Crop Image Upload
+- 📦 Order Management
+- 💳 Razorpay Payments
+- ⭐ Order Reviews & Ratings
+- 👤 User Profile Management
+- 📊 Farmer Order & Revenue Dashboard
+- 🔒 JWT Authentication
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js
+- Vite
+- React Router
+- Axios
+- CSS
+
+### Backend
+- Node.js
+- Express.js
+- JWT
+- bcrypt
+
+### Database
+- PostgreSQL
+- Prisma ORM
+- Supabase
+
+### Payment
+- Razorpay
+
+### Deployment
+- Render
+
+## 📁 Project Structure
+
+```text
+Kisan Direct
+├── frontend
+│   ├── src
+│   │   ├── api
+│   │   ├── components
+│   │   ├── context
+│   │   ├── pages
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── prisma
+├── src
+├── package.json
+└── .env
